@@ -22,7 +22,7 @@ Step 2. Add the dependency
 
 ```java
 dependencies {
-        implementation 'com.github.SamirAhmedSaad:OtpTextField:v0.0.4-beta' 
+        implementation 'com.github.SamirAhmedSaad:OtpTextField:1.0.0' 
 }
 ```
 
@@ -32,19 +32,17 @@ dependencies {
 
 ```
 var otpText by remember { mutableStateOf(TextFieldValue()) }
-var isHasError by remember { mutableStateOf(false) }
 var cellProperties by remember { mutableStateOf(OtpCellProperties()) }
 
 OtpTextField(
     modifier = Modifier.fillMaxWidth(),
     otpText = otpText,
-    isHasError = isHasError,
     otpCellProperties = OtpCellProperties(),
-    onValueChange = {
-        
-    },
-    onOtpFinished = {
-        
+    onValueChange = { otpStatus ->
+        when(otpStatus){
+	    is OtpStatus.Typing -> otp = otpStatus.otp // update state
+	    is OtpStatus.Filled -> // otp detected
+	}
     }
 )
 ```
@@ -59,7 +57,9 @@ OtpCellProperties(
     borderRound = 8.dp,
     cursorWidth = 2.dp,
     cursorColor = Color.Black,
-    hint = ""
+    isHasError = false,
+    isHasCursor = true,
+    hint = "-"
 )
 ```
 
@@ -69,7 +69,8 @@ OtpCellProperties(
 | otpCellSize                 | sets the size(width/height) of otp cell                      |
 | otpDistanceBetweenCells     | sets the distance among cells                                |
 | otpTextStyle                | sets the text style for otp text                             |
-| borderWidth                 | sets the cell border width                                   |  
+| borderWidth                 | sets the cell border width                                   | 
+| isHasError	              | sets if otp cell should has error or not                     |
 | isHasCursor                 | sets if otp cell should has cursor or not                    |
 | cursorWidth                 | sets cursor width                                            |
 | cursorColor                 | sets cursor color                                            |
@@ -77,7 +78,7 @@ OtpCellProperties(
 
 ## Author
 
-Maintained by Samir Ahmed [Linkedin](https://www.linkedin.com/in/samir-ahmed-hayan)
+Maintained by [Samir Ahmed](https://www.linkedin.com/in/samir-ahmed-hayan)
 
 ## Contribution
 
