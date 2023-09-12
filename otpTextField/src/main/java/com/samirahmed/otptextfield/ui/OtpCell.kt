@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import com.samirahmed.otptextfield.theme.Error_Color
 import com.samirahmed.otptextfield.theme.Focus_Border
@@ -21,7 +22,8 @@ fun OtpCell(
     cellProperties: OtpCellProperties,
     index: Int,
     text: String,
-    isHasError: Boolean
+    isHasError: Boolean,
+    isHasCursor: Boolean
 ) {
     val isFocusedOtpCell = index <= text.length
     val cursorPosition = index == text.length
@@ -39,6 +41,7 @@ fun OtpCell(
     Box(
         modifier = Modifier
             .size(cellProperties.otpCellSize)
+            .testTag(TestingTags.CELL)
             .border(
                 width = cellProperties.borderWidth,
                 color = when {
@@ -50,13 +53,13 @@ fun OtpCell(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier,
+            modifier = Modifier.testTag(TestingTags.CELL_TEXT),
             text = char,
             style = cellProperties.otpTextStyle,
             color = textColor,
             textAlign = TextAlign.Center
         )
-        if (cursorPosition) {
+        if (cursorPosition && isHasCursor) {
             OtpCursor(
                 cellProperties = cellProperties
             )

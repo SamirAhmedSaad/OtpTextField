@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samirahmed.otptextfield.ui.OtpCellProperties
+import com.samirahmed.otptextfield.ui.OtpStatus
 import com.samirahmed.otptextfield.ui.OtpTextField
 import com.samirahmed.otptextfield.ui.theme.OtpTextFieldTheme
 
@@ -54,6 +55,7 @@ class MainActivity : ComponentActivity() {
 
         var otpText by remember { mutableStateOf(TextFieldValue()) }
         var isHasError by remember { mutableStateOf(false) }
+        var isHasCursor by remember { mutableStateOf(true) }
         var cellProperties by remember {
             mutableStateOf(
                 OtpCellProperties(
@@ -73,21 +75,36 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxWidth(),
                 otpText = otpText,
                 isHasError = isHasError,
+                isHasCursor = isHasCursor,
                 otpCellProperties = cellProperties,
                 onValueChange = {
-                    otpText = it
-                },
-                onOtpFinished = {
-                    Toast.makeText(this@MainActivity, "OtpFinished", Toast.LENGTH_SHORT).show()
+                    when(it){
+                        is OtpStatus.Typing -> {
+                            otpText = it.otp
+                        }
+                        is OtpStatus.Filled -> {
+                            Toast.makeText(this@MainActivity, "OtpFinished", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             )
 
             Spacer(modifier = Modifier.height(50.dp))
-            ShowHideError(
-                onCheckedChange = {
-                    isHasError = it
-                }
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ShowHideError(
+                    onCheckedChange = {
+                        isHasError = it
+                    }
+                )
+
+                IsHasCursor(
+                    onCheckedChange = {
+                        isHasCursor = it
+                    }
+                )
+            }
 
             Spacer(modifier = Modifier.height(10.dp))
             SliderWithTitle(
@@ -154,6 +171,27 @@ class MainActivity : ComponentActivity() {
                 }
             )
             Text(text = "Show Error")
+        }
+    }
+
+    @Composable
+    fun IsHasCursor(
+        onCheckedChange: (Boolean) -> Unit,
+    ) {
+        var isHasCursor by remember {
+            mutableStateOf(true)
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = isHasCursor,
+                onCheckedChange = {
+                    isHasCursor = it
+                    onCheckedChange(it)
+                }
+            )
+            Text(text = "Is Has Cursor")
         }
     }
 

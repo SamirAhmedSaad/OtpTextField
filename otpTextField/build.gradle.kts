@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.samirahmed.otptextfield"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 23
@@ -54,15 +54,22 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     debugImplementation("androidx.compose.ui:ui-tooling")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("com.google.truth:truth:1.1.4")
+    androidTestImplementation("com.google.truth:truth:1.1.4")
+
+
 }
 
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.github.samir-ahmed"
-            artifactId = "otp-text-field"
-            version = "0.0.4-beta"
+            groupId = "com.github.SamirAhmedSaad"
+            artifactId = "OtpTextField"
+            version = "1.0.0"
 
             afterEvaluate {
                 from(components["release"])

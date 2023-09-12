@@ -17,10 +17,10 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun OtpCursor(
-    cellProperties: OtpCellProperties
+    cellProperties: OtpCellProperties,
+    cursorAnimDuration: Int = 1200
 ) {
     val cursorWidth = cellProperties.cursorWidth
-    val cursorAnimDuration = 1200
     val infiniteTransition = rememberInfiniteTransition(label = "cursor")
     val cursorColor by infiniteTransition.animateColor(
         initialValue = cellProperties.cursorColor,
