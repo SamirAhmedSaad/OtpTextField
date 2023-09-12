@@ -53,9 +53,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun HomeScreen(modifier: Modifier = Modifier) {
 
-        var otpText by remember { mutableStateOf(TextFieldValue()) }
-        var isHasError by remember { mutableStateOf(false) }
-        var isHasCursor by remember { mutableStateOf(true) }
+        var otp by remember { mutableStateOf(TextFieldValue()) }
         var cellProperties by remember {
             mutableStateOf(
                 OtpCellProperties(
@@ -73,14 +71,12 @@ class MainActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(100.dp))
             OtpTextField(
                 modifier = Modifier.fillMaxWidth(),
-                otpText = otpText,
-                isHasError = isHasError,
-                isHasCursor = isHasCursor,
+                otpText = otp,
                 otpCellProperties = cellProperties,
-                onValueChange = {
-                    when(it){
+                onValueChange = {otpStatus ->
+                    when(otpStatus){
                         is OtpStatus.Typing -> {
-                            otpText = it.otp
+                            otp = otpStatus.otp
                         }
                         is OtpStatus.Filled -> {
                             Toast.makeText(this@MainActivity, "OtpFinished", Toast.LENGTH_SHORT).show()
@@ -95,13 +91,17 @@ class MainActivity : ComponentActivity() {
             ) {
                 ShowHideError(
                     onCheckedChange = {
-                        isHasError = it
+                        cellProperties = cellProperties.copy(
+                            isHasError = it
+                        )
                     }
                 )
 
                 IsHasCursor(
                     onCheckedChange = {
-                        isHasCursor = it
+                        cellProperties = cellProperties.copy(
+                            isHasCursor = it
+                        )
                     }
                 )
             }

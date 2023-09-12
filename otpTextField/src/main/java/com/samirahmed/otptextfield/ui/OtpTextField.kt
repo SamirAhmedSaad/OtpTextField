@@ -29,8 +29,6 @@ import com.samirahmed.otptextfield.ui.TestingTags.OTP_TEXT_FIELD_Decoration
 fun OtpTextField(
     modifier: Modifier = Modifier,
     otpText: TextFieldValue = TextFieldValue(),
-    isHasError: Boolean = false,
-    isHasCursor:Boolean = true,
     otpCellProperties: OtpCellProperties = OtpCellProperties(),
     onValueChange: (OtpStatus) -> Unit
 ) {
@@ -62,9 +60,7 @@ fun OtpTextField(
                 OtpDecorationBox(
                     modifier = modifier.testTag(OTP_TEXT_FIELD_Decoration),
                     cellProperties = cellProperties,
-                    otpText = otpText,
-                    isHasError = isHasError,
-                    isHasCursor = isHasCursor
+                    otpText = otpText
                 )
             }
         )
@@ -77,8 +73,6 @@ fun OtpDecorationBox(
     modifier: Modifier = Modifier,
     cellProperties: OtpCellProperties,
     otpText: TextFieldValue,
-    isHasError: Boolean,
-    isHasCursor: Boolean,
 ) {
     Box(
         modifier = modifier
@@ -93,8 +87,6 @@ fun OtpDecorationBox(
                     cellProperties = cellProperties,
                     index = index,
                     text = otpText.text,
-                    isHasError = isHasError,
-                    isHasCursor = isHasCursor
                 )
             }
         }

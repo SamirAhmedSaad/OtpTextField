@@ -43,8 +43,6 @@ class OtpCellTest {
                 cellProperties = otpCellProperties,
                 index = 2,
                 text = "",
-                isHasError = false,
-                isHasCursor = false,
             )
         }
 
@@ -63,8 +61,6 @@ class OtpCellTest {
                 cellProperties = otpCellProperties,
                 index = index,
                 text = text,
-                isHasError = false,
-                isHasCursor = false
             )
         }
         composeTestRule
@@ -83,8 +79,6 @@ class OtpCellTest {
                 cellProperties = otpCellProperties,
                 index = otpCellProperties.otpLength,
                 text = "",
-                isHasError = false,
-                isHasCursor = false
             )
         }
         composeTestRule.onNodeWithTag(TestingTags.CELL_TEXT)

@@ -22,17 +22,15 @@ fun OtpCell(
     cellProperties: OtpCellProperties,
     index: Int,
     text: String,
-    isHasError: Boolean,
-    isHasCursor: Boolean
 ) {
     val isFocusedOtpCell = index <= text.length
     val cursorPosition = index == text.length
     val focusBorderColor =
-        remember(isHasError) { if (isHasError) Error_Color else Focus_Border }
+        remember(cellProperties.isHasError) { if (cellProperties.isHasError) Error_Color else Focus_Border }
     val unFocusBorderColor =
-        remember(isHasError) { if (isHasError) Error_Color else unFocus_Border }
+        remember(cellProperties.isHasError) { if (cellProperties.isHasError) Error_Color else unFocus_Border }
     val textColor =
-        remember(isHasError) { if (isHasError) Error_Color else Focus_Text }
+        remember(cellProperties.isHasError) { if (cellProperties.isHasError) Error_Color else Focus_Text }
     val char = when {
         index == text.length -> ""
         index > text.length -> cellProperties.hint
@@ -59,7 +57,7 @@ fun OtpCell(
             color = textColor,
             textAlign = TextAlign.Center
         )
-        if (cursorPosition && isHasCursor) {
+        if (cursorPosition && cellProperties.isHasCursor) {
             OtpCursor(
                 cellProperties = cellProperties
             )
