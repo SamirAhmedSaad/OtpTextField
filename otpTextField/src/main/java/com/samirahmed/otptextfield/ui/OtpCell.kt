@@ -34,7 +34,7 @@ fun OtpCell(
     val char = when {
         index == text.length -> ""
         index > text.length -> cellProperties.hint
-        else -> text[index].toString()
+        else -> cellProperties.mask.ifBlank { text[index].toString() }
     }
     Box(
         modifier = Modifier

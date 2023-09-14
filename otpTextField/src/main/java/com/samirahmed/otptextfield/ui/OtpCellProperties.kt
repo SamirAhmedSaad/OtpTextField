@@ -17,5 +17,6 @@ data class OtpCellProperties(
     val cursorColor: Color = Color.Black,
     val isHasError: Boolean = false,
     val isHasCursor: Boolean = true,
-    val hint: String = ""
+    val hint: String = "",
+    val mask: String = ""
 )

@@ -106,6 +106,14 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
+            AddTextMask(
+                onCheckedChange = {
+                    cellProperties = cellProperties.copy(
+                        mask = if(it) "*" else ""
+                    )
+                }
+            )
+
             Spacer(modifier = Modifier.height(10.dp))
             SliderWithTitle(
                 title = "Otp length",
@@ -192,6 +200,27 @@ class MainActivity : ComponentActivity() {
                 }
             )
             Text(text = "Is Has Cursor")
+        }
+    }
+
+    @Composable
+    fun AddTextMask(
+        onCheckedChange: (Boolean) -> Unit,
+    ) {
+        var isTextMask by remember {
+            mutableStateOf(false)
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = isTextMask,
+                onCheckedChange = {
+                    isTextMask = it
+                    onCheckedChange(it)
+                }
+            )
+            Text(text = "Add * text mask")
         }
     }
 
