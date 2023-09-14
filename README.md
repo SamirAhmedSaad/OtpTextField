@@ -3,7 +3,7 @@
   Custom Compose OtpTextField that can be used as an OTP field for authentication, PIN code, or any behavior that requires a password
 </p>
 <p align="center">
-<img src="https://github.com/SamirAhmedSaad/OtpTextField/blob/master/demo.gif" width="270" height="500" /> &nbsp;&nbsp;
+<img src="https://github.com/SamirAhmedSaad/OtpTextField/blob/main/demo.gif" width="270" height="500" /> &nbsp;&nbsp;
 </p>
 
 ## Installation in your Project
@@ -22,7 +22,7 @@ Step 2. Add the dependency
 
 ```java
 dependencies {
-        implementation 'com.github.SamirAhmedSaad:OtpTextField:1.0.0' 
+        implementation 'com.github.SamirAhmedSaad:OtpTextField:1.0.2' 
 }
 ```
 
@@ -59,7 +59,8 @@ OtpCellProperties(
     cursorColor = Color.Black,
     isHasError = false,
     isHasCursor = true,
-    hint = "-"
+    hint = "-",
+    mask = "*"
 )
 ```
 
@@ -75,6 +76,7 @@ OtpCellProperties(
 | cursorWidth                 | sets cursor width                                            |
 | cursorColor                 | sets cursor color                                            |
 | hint                        | sets hint for otp cells                                      |
+| mask                        | adds visual transformation for entered text                                      |
 
 ## Author
 
